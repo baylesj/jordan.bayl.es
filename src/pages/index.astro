@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from "astro:content";
+import Header from "../components/Header.astro";
+import Heatmap from "../components/Heatmap.astro";
+import Section from "../components/Section.astro";
+import SoundCloud from "../components/SoundCloud.astro";
+import { site } from "../data/site";
+import Base from "../layouts/Base.astro";
+
+const sections = (await getCollection("sections")).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(sections.map(async (entry) => ({ entry, ...(await render(entry)) })));
+---
+
+<Base title={site.name} description={site.description} shareDescription={site.shareDescription}>
+  <Header />
+  {rendered.map(({ entry, Content }) => (
+    <Section id={entry.id} title={entry.data.title} order={entry.data.order}>
+      <Content components={{ Heatmap, SoundCloud }} />
+    </Section>
+  ))}
+</Base>

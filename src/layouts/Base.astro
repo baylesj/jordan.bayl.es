@@ -1,0 +1,41 @@
+---
+import "@fontsource-variable/schibsted-grotesk";
+import "@fontsource/fira-code/400.css";
+import "@fontsource/fira-code/500.css";
+import "@fontsource/eb-garamond/500.css";
+import "bayl.es-style/eopsin.css";
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description: string;
+  shareDescription?: string;
+}
+
+const { title, description, shareDescription = description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={shareDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body data-site="jordan">
+    <main>
+      <slot />
+      <footer>
+        &copy; {new Date().getFullYear()} {title}
+      </footer>
+    </main>
+  </body>
+</html>

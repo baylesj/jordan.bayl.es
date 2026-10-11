@@ -1,0 +1,93 @@
+/*
+ * jordan.bayl.es on top of bayl.es-style. The shared CSS sits in cascade layers, so these
+ * unlayered rules win where they overlap.
+ */
+
+:root {
+  --sans: "Schibsted Grotesk Variable", -apple-system, system-ui, sans-serif;
+  --link-line: color-mix(in srgb, var(--teal) 30%, var(--ground));
+}
+
+main {
+  gap: 44px;
+  max-width: 760px;
+  padding: 72px 20px 56px;
+}
+
+a {
+  border-bottom: 1px solid var(--link-line);
+  text-decoration: none;
+}
+
+a:hover {
+  border-color: var(--ink);
+}
+
+/* The one exception to the family: the name is set in EB Garamond. */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.name {
+  margin: 0;
+  font: 500 clamp(48px, 10vw, 68px) / 0.95 var(--serif);
+  letter-spacing: -0.01em;
+}
+
+.name::after {
+  content: ".";
+  color: var(--sig);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: baseline;
+  justify-content: space-between;
+  color: var(--comment);
+  font: 13px/1.6 var(--mono);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lede {
+  margin-top: -4px;
+  font-size: 22px;
+  line-height: 1.45;
+}
+
+.prose {
+  min-width: 0;
+}
+
+.prose p {
+  max-width: 64ch;
+  margin: 0 0 14px;
+  text-wrap: pretty;
+}
+
+@media (width <= 560px) {
+  main {
+    padding-top: 48px;
+  }
+
+  .lede {
+    font-size: 20px;
+  }
+
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

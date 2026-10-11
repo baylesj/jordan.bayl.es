@@ -1,0 +1,20 @@
+---
+import { site } from "../data/site";
+---
+
+<header class="intro">
+  <h1 class="name">{site.name}</h1>
+  <div class="meta">
+    <p>
+      {site.roles.join(" · ")} · <span class="public">{site.place}</span>
+    </p>
+    <ul class="links">
+      {site.links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+<p class="lede">{site.lede}</p>
