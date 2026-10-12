@@ -35,7 +35,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main>
       <slot />
       <footer>
-        <span>&copy; {new Date().getFullYear()} {title}</span>
+        <span>
+          &copy; {new Date().getFullYear()} {title}
+        </span>
         <a href="https://style.bayl.es">style.bayl.es</a>
       </footer>
     </main>
