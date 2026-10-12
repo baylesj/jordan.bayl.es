@@ -18,7 +18,7 @@
     "@fontsource/eb-garamond": "^5.3.0",
     "@fontsource/fira-code": "^5.3.0",
     "astro": "^7.3.8",
-    "bayl.es-style": "github:baylesj/bayl.es-style#v1.2.0"
+    "bayl.es-style": "github:baylesj/bayl.es-style#v1.2.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
