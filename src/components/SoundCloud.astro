@@ -1,6 +1,10 @@
 ---
-/** SoundCloud's profile player for Chasma Sound, with the controls in the site's pink. */
-const params = new URLSearchParams({
+/**
+ * SoundCloud's profile player for Chasma Sound. SoundCloud has no dark theme, so in dark mode we use
+ * its "visual" player (cover art with white controls), which sits well on a dark page; light mode
+ * keeps the classic white player. Controls are in the site's pink either way.
+ */
+const base = {
   url: "https://api.soundcloud.com/users/228364454",
   color: "#e0457b",
   auto_play: "false",
@@ -9,18 +13,37 @@ const params = new URLSearchParams({
   show_user: "true",
   show_reposts: "false",
   show_teaser: "false",
-  visual: "false",
-});
+};
+const player = (visual: boolean) =>
+  `https://w.soundcloud.com/player/?${new URLSearchParams({ ...base, visual: String(visual) })}`;
 ---
 
 <div class="player">
   <iframe
+    data-soundcloud
+    data-light={player(false)}
+    data-dark={player(true)}
     title="Chasma Sound on SoundCloud"
     loading="lazy"
     allow="autoplay; encrypted-media"
-    src={`https://w.soundcloud.com/player/?${params}`}
+    src={player(false)}
   ></iframe>
 </div>
+
+<script>
+  // Swap to the visual player in dark mode (and back if the theme changes while the page is open).
+  const frame = document.querySelector<HTMLIFrameElement>("iframe[data-soundcloud]");
+  const dark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function apply(): void {
+    if (!frame) return;
+    const want = dark.matches ? frame.dataset.dark : frame.dataset.light;
+    if (want && frame.src !== want) frame.src = want;
+  }
+
+  apply();
+  dark.addEventListener("change", apply);
+</script>
 
 <style>
   .player {
