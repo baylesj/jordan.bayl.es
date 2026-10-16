@@ -62,6 +62,13 @@ a:hover {
   list-style: none;
 }
 
+/* The theme switch sits at the end of the links row; pull it in so its tap area doesn't push the row down. */
+.links .theme {
+  display: flex;
+  align-items: center;
+  margin: -10px -8px;
+}
+
 .lede {
   margin-top: -4px;
   font-size: 22px;

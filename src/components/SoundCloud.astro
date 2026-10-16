@@ -31,18 +31,28 @@ const player = (visual: boolean) =>
 </div>
 
 <script>
-  // Swap to the visual player in dark mode (and back if the theme changes while the page is open).
+  // Swap to the visual player in dark mode (and back if the theme changes while the page is open). The theme
+  // is the one picked with the theme switch (data-theme on <html>), else the system's.
   const frame = document.querySelector<HTMLIFrameElement>("iframe[data-soundcloud]");
-  const dark = window.matchMedia("(prefers-color-scheme: dark)");
+  const system = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function isDark(): boolean {
+    const chosen = document.documentElement.dataset.theme;
+    return chosen ? chosen === "dark" : system.matches;
+  }
 
   function apply(): void {
     if (!frame) return;
-    const want = dark.matches ? frame.dataset.dark : frame.dataset.light;
+    const want = isDark() ? frame.dataset.dark : frame.dataset.light;
     if (want && frame.src !== want) frame.src = want;
   }
 
   apply();
-  dark.addEventListener("change", apply);
+  system.addEventListener("change", apply);
+  new MutationObserver(apply).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
 </script>
 
 <style>

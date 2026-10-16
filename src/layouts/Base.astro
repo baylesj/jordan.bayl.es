@@ -4,6 +4,8 @@ import "@fontsource/fira-code/400.css";
 import "@fontsource/fira-code/500.css";
 import "@fontsource/eb-garamond/500.css";
 import "bayl.es-style/eopsin.min.css";
+// The shared theme switch, inlined so a chosen theme is applied before the page draws.
+import themeScript from "bayl.es-style/js/theme.js?raw";
 import "../styles/site.css";
 
 interface Props {
@@ -30,6 +32,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script is:inline set:html={themeScript} />
   </head>
   <body data-site="jordan">
     <main>
