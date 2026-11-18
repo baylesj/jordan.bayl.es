@@ -1,11 +1,12 @@
 ---
-import "@fontsource-variable/schibsted-grotesk";
-import "@fontsource/fira-code/400.css";
-import "@fontsource/fira-code/500.css";
-import "@fontsource/eb-garamond/500.css";
+import "@fontsource-variable/atkinson-hyperlegible-next";
+import "@fontsource-variable/atkinson-hyperlegible-mono";
+import "@fontsource-variable/geologica/shrp.css";
 import "bayl.es-style/eopsin.min.css";
 // The shared theme switch, inlined so a chosen theme is applied before the page draws.
 import themeScript from "bayl.es-style/js/theme.js?raw";
+// The galaxy behind the header: one map for every bayl.es site, with jordan's star (Alkaid) lit.
+import galaxyScript from "bayl.es-style/js/galaxy.js?raw";
 import "../styles/site.css";
 
 interface Props {
@@ -35,6 +36,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <script is:inline set:html={themeScript} />
   </head>
   <body data-site="jordan">
+    <slot name="header" />
     <main>
       <slot />
       <footer>
@@ -44,5 +46,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a href="https://style.bayl.es">style.bayl.es</a>
       </footer>
     </main>
+    <script is:inline set:html={galaxyScript} />
   </body>
 </html>

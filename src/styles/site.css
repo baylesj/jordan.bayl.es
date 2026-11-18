@@ -4,14 +4,17 @@
  */
 
 :root {
-  --sans: "Schibsted Grotesk Variable", -apple-system, system-ui, sans-serif;
+  /* The fonts are self-hosted from Fontsource, whose variable families carry a " Variable" suffix. */
+  --sans: "Atkinson Hyperlegible Next Variable", -apple-system, system-ui, sans-serif;
+  --mono: "Atkinson Hyperlegible Mono Variable", ui-monospace, monospace;
+  --name: "Geologica Variable", var(--sans);
   --link-line: color-mix(in srgb, var(--teal) 30%, var(--ground));
 }
 
 main {
   gap: 44px;
   max-width: 760px;
-  padding: 72px 20px 56px;
+  padding: 36px 20px 56px;
 }
 
 a {
@@ -23,32 +26,31 @@ a:hover {
   border-color: var(--ink);
 }
 
-/* The one exception to the family: the name is set in EB Garamond. */
-.intro {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--ink);
+/* The galaxy header: the name and links sit in the panel over the map. */
+.scope .wrap {
+  max-width: 760px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
+.intro {
+  gap: 14px;
+  padding: 18px 20px 14px;
+}
+
+/* The one exception to the family: the name is set in Geologica, thin, sharp and spaced, with no period. */
 .name {
   margin: 0;
-  font: 500 clamp(48px, 10vw, 68px) / 0.95 var(--serif);
-  letter-spacing: -0.01em;
-}
-
-.name::after {
-  content: ".";
-  color: var(--sig);
+  font: 200 clamp(36px, 8vw, 60px) / 1 var(--name);
+  font-variation-settings: "SHRP" 100;
+  letter-spacing: 0.12em;
 }
 
 .meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 24px;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
   color: var(--comment);
   font: 13px/1.6 var(--mono);
 }
@@ -87,7 +89,16 @@ a:hover {
 
 @media (width <= 560px) {
   main {
-    padding-top: 48px;
+    padding-top: 28px;
+  }
+
+  .scope .wrap {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .intro {
+    padding: 14px 16px 12px;
   }
 
   .lede {

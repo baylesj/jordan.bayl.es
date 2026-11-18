@@ -12,7 +12,8 @@ const rendered = await Promise.all(sections.map(async (entry) => ({ entry, ...(a
 ---
 
 <Base title={site.name} description={site.description} shareDescription={site.shareDescription}>
-  <Header />
+  <Header slot="header" />
+  <p class="lede">{site.lede}</p>
   {rendered.map(({ entry, Content }) => (
     <Section id={entry.id} title={entry.data.title} order={entry.data.order}>
       <Content components={{ Heatmap, SoundCloud }} />
